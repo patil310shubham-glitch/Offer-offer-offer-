@@ -1,0 +1,109 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Security</title>
+
+<style>
+body {
+  background: #000;
+  color: #00ff41;
+  font-family: monospace;
+  padding: 20px;
+}
+h1 {
+  color: red;
+  text-align: center;
+  text-shadow: 0 0 15px red;
+}
+.box {
+  border: 1px solid #00ff41;
+  padding: 15px;
+  box-shadow: 0 0 15px #00ff4155;
+}
+.warning {
+  color: red;
+  text-align: center;
+  animation: blink 0.7s infinite;
+}
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+#logs {
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+button {
+  width: 100%;
+  padding: 15px;
+  background: #00ff41;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+}
+#result {
+  color: red;
+  text-align: center;
+  font-size: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>⚠ SYSTEM ALERT ⚠</h1>
+
+<div class="box">
+  <p class="warning">UNAUTHORIZED ACCESS DETECTED</p>
+  <p>Security Status: CHECKING</p>
+  <p>System Scan: INITIALIZED</p>
+  <hr>
+
+  <div id="logs">> System initialized...</div>
+
+  <br>
+  <button onclick="scan()">RUN SECURITY SCAN</button>
+  <div id="result"></div>
+</div>
+
+<script>
+function scan() {
+  const logs = document.getElementById("logs");
+  const result = document.getElementById("result");
+  const button = document.querySelector("button");
+
+  button.disabled = true;
+  result.innerHTML = "";
+  logs.innerHTML = "";
+
+  const lines = [
+    "> Initializing security protocol...",
+    "> Scanning system files...",
+    "> Checking network status...",
+    "> Analyzing system activity...",
+    "> Processing security report...",
+    "> Scan completed."
+  ];
+
+  let i = 0;
+
+  const timer = setInterval(() => {
+    if (i < lines.length) {
+      logs.innerHTML += lines[i++] + "<br>";
+    } else {
+      clearInterval(timer);
+      result.innerHTML = "⚠ ACCESS ALERT ⚠";
+      setTimeout(() => {
+        result.innerHTML = "SYSTEM CHECK COMPLETE";
+        button.disabled = false;
+      }, 2500);
+    }
+  }, 1000);
+}
+</script>
+
+</body>
+</html>
+```
